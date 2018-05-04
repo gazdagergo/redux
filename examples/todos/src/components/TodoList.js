@@ -1,5 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { connect } from "react-redux";
+import { toggleTodo } from "../actions";
 import Todo from './Todo'
 
 const TodoList = ({ todos, toggleTodo }) => (
@@ -23,4 +25,13 @@ TodoList.propTypes = {
   toggleTodo: PropTypes.func.isRequired
 }
 
-export default TodoList
+const mapStateToProps = state => ({
+  todos: state.todos
+});
+
+const mapDispatchToProps = dispatch => ({
+  toggleTodo: id => dispatch(toggleTodo(id))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(TodoList);
+
