@@ -3,8 +3,10 @@ import PropTypes from 'prop-types'
 
 const Todos = ({todos}) => (
   <ul>
-    {todos.map((post, i) =>
-      <li key={i}>{post.title}</li>
+    {todos.map((post, i) => {
+      console.log(post);
+      return null;
+    }
     )}
   </ul>
 )
