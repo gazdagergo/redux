@@ -10,13 +10,9 @@ export const receiveTodos = json => ({
   todos: json.data.children.map(child => child.data),
 })
 
-const fetchTodos = () => dispatch => {
+export const fetchTodos = () => dispatch => {
   dispatch(requestTodos())
   return fetch(`https://www.reddit.com/r/frontend.json`)
     .then(response => response.json())
     .then(json => dispatch(receiveTodos(json)))
-}
-
-export const fetchTodosIfNeeded = () => (dispatch, getState) => {
-  return dispatch(fetchTodos())
 }

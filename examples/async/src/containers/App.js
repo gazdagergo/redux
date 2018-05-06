@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { fetchTodosIfNeeded } from '../actions'
+import { fetchTodos } from '../actions'
 import Todos from '../components/Todos'
 
 class App extends Component {
@@ -13,14 +13,14 @@ class App extends Component {
 
   componentDidMount() {
     const { dispatch } = this.props
-    dispatch(fetchTodosIfNeeded())
+    dispatch(fetchTodos())
   }
 
   handleRefreshClick = e => {
     e.preventDefault()
 
     const { dispatch } = this.props
-    dispatch(fetchTodosIfNeeded())
+    dispatch(fetchTodos())
   }
 
   render() {
