@@ -33,7 +33,7 @@ const postsBySubreddit = (state = { }, action) => {
     case REQUEST_POSTS:
       return {
         ...state,
-        [action.subreddit]: posts(state[action.subreddit], action)
+        frontend: posts(state.frontend, action)
       }
     default:
       return state

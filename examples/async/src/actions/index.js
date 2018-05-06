@@ -1,24 +1,22 @@
 export const REQUEST_POSTS = 'REQUEST_POSTS'
 export const RECEIVE_POSTS = 'RECEIVE_POSTS'
 
-export const requestPosts = subreddit => ({
+export const requestPosts = () => ({
   type: REQUEST_POSTS,
-  subreddit
 })
 
-export const receivePosts = (subreddit, json) => ({
+export const receivePosts = json => ({
   type: RECEIVE_POSTS,
-  subreddit,
   posts: json.data.children.map(child => child.data),
 })
 
-const fetchPosts = subreddit => dispatch => {
-  dispatch(requestPosts(subreddit))
-  return fetch(`https://www.reddit.com/r/${subreddit}.json`)
+const fetchPosts = () => dispatch => {
+  dispatch(requestPosts())
+  return fetch(`https://www.reddit.com/r/frontend.json`)
     .then(response => response.json())
-    .then(json => dispatch(receivePosts(subreddit, json)))
+    .then(json => dispatch(receivePosts(json)))
 }
 
-export const fetchPostsIfNeeded = subreddit => (dispatch, getState) => {
-  return dispatch(fetchPosts(subreddit))
+export const fetchPostsIfNeeded = () => (dispatch, getState) => {
+  return dispatch(fetchPosts())
 }

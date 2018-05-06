@@ -12,22 +12,15 @@ class App extends Component {
   }
 
   componentDidMount() {
-    const { dispatch, selectedSubreddit } = this.props
-    dispatch(fetchPostsIfNeeded(selectedSubreddit))
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.selectedSubreddit !== this.props.selectedSubreddit) {
-      const { dispatch, selectedSubreddit } = nextProps
-      dispatch(fetchPostsIfNeeded(selectedSubreddit))
-    }
+    const { dispatch } = this.props
+    dispatch(fetchPostsIfNeeded())
   }
 
   handleRefreshClick = e => {
     e.preventDefault()
 
-    const { dispatch, selectedSubreddit } = this.props
-    dispatch(fetchPostsIfNeeded(selectedSubreddit))
+    const { dispatch } = this.props
+    dispatch(fetchPostsIfNeeded())
   }
 
   render() {
@@ -64,7 +57,6 @@ const mapStateToProps = state => {
   }
 
   return {
-    selectedSubreddit: 'frontend',
     posts,
     isFetching,
   }
