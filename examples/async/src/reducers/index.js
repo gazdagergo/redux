@@ -3,10 +3,9 @@ import {
   REQUEST_TODOS, RECEIVE_TODOS
 } from '../actions'
 
-const todos = (state = {
-  isFetching: false,
-  items: []
-}, action) => {
+const initialStatre = {isFetching: false, items: []}
+
+const getTodos = (state = initialStatre, action) => {
   switch (action.type) {
     case REQUEST_TODOS:
       return {
@@ -22,20 +21,7 @@ const todos = (state = {
     default:
       return state
   }
-}
-
-const getTodos = (state = { }, action) => {
-  switch (action.type) {
-    case REQUEST_TODOS:
-    case RECEIVE_TODOS:
-      return {
-        ...state,
-        ...todos(state, action)
-      }
-    default:
-      return state
-  }
-}
+};
 
 const rootReducer = combineReducers({
   getTodos,
