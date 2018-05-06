@@ -48,9 +48,9 @@ class App extends Component {
 }
 
 const mapStateToProps = state => {
-  const { postsBySubreddit } = state;
-  if (postsBySubreddit.items) {
-    const { isFetching, items: posts } = postsBySubreddit;
+  const { getTodos } = state;
+  if (getTodos.items) {
+    const { isFetching, items: posts } = getTodos;
     return { posts, isFetching };
   } 
   return { posts: [], isFetching: true }

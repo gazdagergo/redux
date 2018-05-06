@@ -24,7 +24,7 @@ const posts = (state = {
   }
 }
 
-const postsBySubreddit = (state = { }, action) => {
+const getTodos = (state = { }, action) => {
   switch (action.type) {
     case RECEIVE_POSTS:
       return {
@@ -37,7 +37,7 @@ const postsBySubreddit = (state = { }, action) => {
 }
 
 const rootReducer = combineReducers({
-  postsBySubreddit,
+  getTodos,
 })
 
 export default rootReducer
