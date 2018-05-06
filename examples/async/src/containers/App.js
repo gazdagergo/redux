@@ -1,32 +1,32 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { fetchPostsIfNeeded } from '../actions'
-import Posts from '../components/Posts'
+import { fetchTodosIfNeeded } from '../actions'
+import Todos from '../components/Todos'
 
 class App extends Component {
   static propTypes = {
-    posts: PropTypes.array.isRequired,
+    todos: PropTypes.array.isRequired,
     isFetching: PropTypes.bool.isRequired,
     dispatch: PropTypes.func.isRequired
   }
 
   componentDidMount() {
     const { dispatch } = this.props
-    dispatch(fetchPostsIfNeeded())
+    dispatch(fetchTodosIfNeeded())
   }
 
   handleRefreshClick = e => {
     e.preventDefault()
 
     const { dispatch } = this.props
-    dispatch(fetchPostsIfNeeded())
+    dispatch(fetchTodosIfNeeded())
   }
 
   render() {
-    const { posts, isFetching } = this.props;
+    const { todos, isFetching } = this.props;
 
-    const isEmpty = posts.length === 0
+    const isEmpty = todos.length === 0
     return (
       <div>
         <p>
@@ -39,7 +39,7 @@ class App extends Component {
         {isEmpty
           ? (isFetching ? <h2>Loading...</h2> : <h2>Empty.</h2>)
           : <div style={{ opacity: isFetching ? 0.5 : 1 }}>
-              <Posts posts={posts} />
+              <Todos todos={todos} />
             </div>
         }
       </div>
@@ -50,10 +50,10 @@ class App extends Component {
 const mapStateToProps = state => {
   const { getTodos } = state;
   if (getTodos.items) {
-    const { isFetching, items: posts } = getTodos;
-    return { posts, isFetching };
+    const { isFetching, items: todos } = getTodos;
+    return { todos, isFetching };
   } 
-  return { posts: [], isFetching: true }
+  return { todos: [], isFetching: true }
 }
 
 export default connect(mapStateToProps)(App)

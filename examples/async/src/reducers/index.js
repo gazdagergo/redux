@@ -1,23 +1,23 @@
 import { combineReducers } from 'redux'
 import {
-  REQUEST_POSTS, RECEIVE_POSTS
+  REQUEST_TODOS, RECEIVE_TODOS
 } from '../actions'
 
-const posts = (state = {
+const todos = (state = {
   isFetching: false,
   items: []
 }, action) => {
   switch (action.type) {
-    case REQUEST_POSTS:
+    case REQUEST_TODOS:
       return {
         ...state,
         isFetching: true,
       }
-    case RECEIVE_POSTS:
+    case RECEIVE_TODOS:
       return {
         ...state,
         isFetching: false,
-        items: action.posts,
+        items: action.todos,
       }
     default:
       return state
@@ -26,10 +26,10 @@ const posts = (state = {
 
 const getTodos = (state = { }, action) => {
   switch (action.type) {
-    case RECEIVE_POSTS:
+    case RECEIVE_TODOS:
       return {
         ...state,
-        ...posts(state, action)
+        ...todos(state, action)
       }
     default:
       return state

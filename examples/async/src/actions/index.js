@@ -1,22 +1,22 @@
-export const REQUEST_POSTS = 'REQUEST_POSTS'
-export const RECEIVE_POSTS = 'RECEIVE_POSTS'
+export const REQUEST_TODOS = 'REQUEST_TODOS'
+export const RECEIVE_TODOS = 'RECEIVE_TODOS'
 
-export const requestPosts = () => ({
-  type: REQUEST_POSTS,
+export const requestTodos = () => ({
+  type: REQUEST_TODOS,
 })
 
-export const receivePosts = json => ({
-  type: RECEIVE_POSTS,
-  posts: json.data.children.map(child => child.data),
+export const receiveTodos = json => ({
+  type: RECEIVE_TODOS,
+  todos: json.data.children.map(child => child.data),
 })
 
-const fetchPosts = () => dispatch => {
-  dispatch(requestPosts())
+const fetchTodos = () => dispatch => {
+  dispatch(requestTodos())
   return fetch(`https://www.reddit.com/r/frontend.json`)
     .then(response => response.json())
-    .then(json => dispatch(receivePosts(json)))
+    .then(json => dispatch(receiveTodos(json)))
 }
 
-export const fetchPostsIfNeeded = () => (dispatch, getState) => {
-  return dispatch(fetchPosts())
+export const fetchTodosIfNeeded = () => (dispatch, getState) => {
+  return dispatch(fetchTodos())
 }
