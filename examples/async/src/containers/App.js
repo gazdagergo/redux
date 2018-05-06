@@ -24,8 +24,11 @@ class App extends Component {
   }
 
   render() {
-    const { posts, isFetching } = this.props
-    const isEmpty = posts.length === 0
+    const { posts, isFetching } = this.props;
+
+    if (!posts) return null;
+
+    const isEmpty = posts && posts.length === 0
     return (
       <div>
         <p>
@@ -48,10 +51,11 @@ class App extends Component {
 
 const mapStateToProps = state => {
   const { postsBySubreddit } = state
+  console.log(postsBySubreddit);
   const {
     isFetching,
     items: posts
-  } = postsBySubreddit['frontend'] || {
+  } = postsBySubreddit || {
     isFetching: true,
     items: []
   }

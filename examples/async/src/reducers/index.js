@@ -5,7 +5,6 @@ import {
 
 const posts = (state = {
   isFetching: false,
-  didInvalidate: false,
   items: []
 }, action) => {
   switch (action.type) {
@@ -13,13 +12,11 @@ const posts = (state = {
       return {
         ...state,
         isFetching: true,
-        didInvalidate: false
       }
     case RECEIVE_POSTS:
       return {
         ...state,
         isFetching: false,
-        didInvalidate: false,
         items: action.posts,
       }
     default:
@@ -30,10 +27,9 @@ const posts = (state = {
 const postsBySubreddit = (state = { }, action) => {
   switch (action.type) {
     case RECEIVE_POSTS:
-    case REQUEST_POSTS:
       return {
         ...state,
-        frontend: posts(state.frontend, action)
+        ...posts(state, action)
       }
     default:
       return state
