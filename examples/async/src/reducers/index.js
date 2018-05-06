@@ -26,6 +26,7 @@ const todos = (state = {
 
 const getTodos = (state = { }, action) => {
   switch (action.type) {
+    case REQUEST_TODOS:
     case RECEIVE_TODOS:
       return {
         ...state,
