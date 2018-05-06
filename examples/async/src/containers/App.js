@@ -8,7 +8,6 @@ class App extends Component {
   static propTypes = {
     posts: PropTypes.array.isRequired,
     isFetching: PropTypes.bool.isRequired,
-    lastUpdated: PropTypes.number,
     dispatch: PropTypes.func.isRequired
   }
 
@@ -32,17 +31,11 @@ class App extends Component {
   }
 
   render() {
-    const { posts, isFetching, lastUpdated } = this.props
+    const { posts, isFetching } = this.props
     const isEmpty = posts.length === 0
     return (
       <div>
         <p>
-          {lastUpdated &&
-            <span>
-              Last updated at {new Date(lastUpdated).toLocaleTimeString()}.
-              {' '}
-            </span>
-          }
           {!isFetching &&
             <button onClick={this.handleRefreshClick}>
               Refresh
@@ -64,7 +57,6 @@ const mapStateToProps = state => {
   const { postsBySubreddit } = state
   const {
     isFetching,
-    lastUpdated,
     items: posts
   } = postsBySubreddit['frontend'] || {
     isFetching: true,
@@ -75,7 +67,6 @@ const mapStateToProps = state => {
     selectedSubreddit: 'frontend',
     posts,
     isFetching,
-    lastUpdated
   }
 }
 
